@@ -8,6 +8,7 @@
           <element id="module-output" name="jstore" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.1.2" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-beans:4.0.4.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-core:4.0.4.RELEASE" />
