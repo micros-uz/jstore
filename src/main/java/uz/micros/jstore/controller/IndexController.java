@@ -1,10 +1,7 @@
 package uz.micros.jstore.controller;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uz.micros.jstore.entity.store.Author;
 
@@ -41,7 +38,8 @@ public class IndexController {
         return new ModelAndView("home")
                 .addObject("name", "John")
                 .addObject("author", a)
-                .addObject("authors", list);
+                .addObject("authors", list)
+                .addObject("newAuthor", new Author());
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -52,6 +50,15 @@ public class IndexController {
         a.setName(title);
 
         list.add(a);
+
+        return "redirect:/";
+    }
+
+    @RequestMapping(value = "/save2", method = RequestMethod.POST)
+    public String save2(@ModelAttribute("newAuthor") Author newAuthor, HttpSession session) {
+        List<Author> list = (List<Author>) session.getAttribute("authors");
+
+        list.add(newAuthor);
 
         return "redirect:/";
     }
