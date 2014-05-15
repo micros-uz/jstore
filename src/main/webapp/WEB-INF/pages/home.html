@@ -16,5 +16,10 @@
             Name is <span th:text="${s.name}"></span>
         </li>
     </ul>
+
+    <form action="/save" method="post">
+        <input type="text" name="title"/>
+        <input type="submit" value="Save"/>
+    </form>
 </body>
 </html>

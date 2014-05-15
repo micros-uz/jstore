@@ -55,7 +55,6 @@
             <version>${thymeleaf.ver}</version>
             <scope>compile</scope>
         </dependency>
-
     </dependencies>
     <build>
         <finalName>jstore</finalName>
@@ -73,6 +72,7 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>${jetty.ver}</version>
             </plugin>
+
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
