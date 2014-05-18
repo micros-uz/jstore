@@ -12,15 +12,7 @@ import java.util.List;
 @Controller
 public class IndexController {
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    @ResponseBody
-    public String showIndex() {
-        return "<h2>Hello world</h2>" +
-                "" +
-                "<a href=\"home\">Home</a>";
-    }
-
-    @RequestMapping("/home")
+    @RequestMapping("/")
     public ModelAndView home(HttpSession session) {
         Author a = new Author();
         a.setName("Akbar");
