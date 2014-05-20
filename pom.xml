@@ -69,6 +69,12 @@
             <version>${thymeleaf.ver}</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>nz.net.ultraq.thymeleaf</groupId>
+            <artifactId>thymeleaf-layout-dialect</artifactId>
+            <version>1.2.4</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
     <build>
         <finalName>jstore</finalName>

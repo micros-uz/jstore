@@ -1,15 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="master">
 <head lang="en">
     <meta charset="UTF-8"/>
     <title>Home</title>
-    <link href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css"
-          th:href="@{/webjars/bootstrap/3.1.1/css/bootstrap.min.css}" rel="stylesheet"/>
-    <link rel="stylesheet" type="text/css"
-          href="/resources/css/site.css"/>
 </head>
 <body>
-<div class="container">
+<section layout:fragment="content">
     <h2>Hello World from Thymeleaf View!!!</h2>
 
     <h3 th:text="${name}"></h3>
@@ -31,12 +30,7 @@
         <input type="text" th:field="*{name}"/>
         <input type="submit" value="Save"/>
     </form>
-</div>
+</section>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.0/jquery.min.js"
-        th:src="@{/webjars/jquery/2.1.0/jquery.js}"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"
-        th:src="@{/webjars/bootstrap/3.1.1/js/bootstrap.min.js}" rel="stylesheet"></script>
-<script src="/resources/js/site.js" language="JavaScript"/>
 </body>
 </html>
