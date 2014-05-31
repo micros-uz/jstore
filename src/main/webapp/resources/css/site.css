@@ -5,3 +5,16 @@
 .post-date{
     color:gray;
 }
+
+.comment{
+    margin-bottom: 20px;
+}
+
+.post{
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+textarea {
+    resize: none;
+}
