@@ -12,6 +12,7 @@ import uz.micros.jstore.util.Interceptor;
 
 @Configuration
 @ComponentScan
+@EnableWebMvc
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

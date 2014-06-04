@@ -4,7 +4,9 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import uz.micros.jstore.entity.blog.Blog;
 import uz.micros.jstore.entity.blog.Post;
+import uz.micros.jstore.util.DbManager;
 
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -16,9 +18,11 @@ public class BlogService {
         Blog blog = new Blog();
         blog.setTitle("jStore Corporate Blog!!!");
 
-        List<Post> posts = new ArrayList<>();
+        List<Post> posts = DbManager.runQuery("select * from \"Posts\"");
 
-        for(int k = 0; k < 3; k++){
+
+
+/*        for(int k = 0; k < 3; k++){
 
             Post post = new Post();
             post.setId(k + 100);
@@ -31,7 +35,7 @@ public class BlogService {
                     "Силовая операция на востоке Украины продолжается с апреля 2014 года. После президентских выборов 25 мая на Украине боевые действия в регионе вновь перешли в активную фазу. Тогда избранный глава государства Петр Порошенко высказался за продолжение силовой операции. А вице-премьер Дмитрий Ярема пообещал, что бои на востоке страны продлятся до тех пор, пока не будут уничтожены все ополченцы.");
 
             posts.add(post);
-        }
+        }*/
 
         blog.setPosts(posts);
 
