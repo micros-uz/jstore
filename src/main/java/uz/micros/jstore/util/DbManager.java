@@ -13,16 +13,18 @@ public class DbManager {
         Connection res = null;
 
         try {
-            Class.forName("org.postgresql.Driver");
+            //Class.forName("org.postgresql.Driver");
+            Class.forName("com.mysql.jdbc.Driver");
             System.out.println("Driver loaded!");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+
         }
 
         try {
              res = DriverManager.getConnection(
-                    "jdbc:postgresql://127.0.0.1:5432/jstore",
-                    "postgres", "root");
+                    "jdbc:mysql://127.0.0.1:3306/jstore",
+                    "root", "root");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,8 +45,9 @@ public class DbManager {
             while(rs.next()){
                 Post p = new Post();
                 p.setId(rs.getInt(1));
-                p.setDate(rs.getDate(2));
-                p.setText(rs.getString(3));
+                p.setSubject(rs.getString(2));
+                p.setDate(rs.getDate(3));
+                p.setText(rs.getString(4));
 
                 list.add(p);
             }

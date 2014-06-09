@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import uz.micros.jstore.entity.blog.Blog;
 import uz.micros.jstore.service.blog.BlogService;
+import uz.micros.jstore.util.DbManager;
 
 @Controller
 @RequestMapping("/blog")
