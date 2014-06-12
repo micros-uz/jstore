@@ -1,12 +1,32 @@
 package uz.micros.jstore.entity.blog;
 
 
+import javax.persistence.*;
 import java.util.Date;
 
+@Entity
 public class Comment {
+    @Id
+    @GeneratedValue
+    private int id;
     private String text;
     private Date date;
     private String author;
+
+    @Column(name = "post_id", insertable = false, updatable = false)
+    private int post_id;
+
+    @ManyToOne
+    @JoinColumn(name = "post_id", nullable = false)
+    private Post post;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getText() {
         return text;

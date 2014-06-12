@@ -1,13 +1,14 @@
 package uz.micros.jstore.repository;
 
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import uz.micros.jstore.entity.blog.Post;
 import uz.micros.jstore.util.DbManager;
 import uz.micros.jstore.util.Mapper;
 
-import javax.sql.DataSource;
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class PostRepository {
 
     @Autowired
-    private DataSource dataSrc;
+    private SessionFactory sessionFactory;
 
     private class PostMapper extends Mapper<Post>{}
 
@@ -33,18 +34,20 @@ public class PostRepository {
     public void deletePost(int id){
     }
 
+    @Transactional
     public List<Post> getPosts() {
         List<Post> res = new ArrayList<>();
 
-        JdbcTemplate tmpl = new JdbcTemplate(dataSrc);
+        Session session = sessionFactory.getCurrentSession();
+        res = session.createQuery("from Post").list();
 
-        List<Map<String, Object>> list = DbManager.runQuery("select * from \"Posts\"");
+/*        List<Map<String, Object>> list = DbManager.runQuery("select * from \"Posts\"");
 
         for(Map<String, Object> item : list){
             Post p = new PostMapper().map(item);
 
             res.add(p);
-        }
+        }*/
 
         return res;
     }

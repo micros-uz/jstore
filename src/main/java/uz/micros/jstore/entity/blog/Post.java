@@ -1,14 +1,23 @@
 package uz.micros.jstore.entity.blog;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.Date;
 import java.util.List;
 
+@Entity
 public class Post {
+    @Id
+    @GeneratedValue
     private int id;
     private String subject;
     private String text;
     private Date date;
     private String author;
+
+    @OneToMany(mappedBy = "post")
     private List<Comment> comments;
 
     public int getId() {
