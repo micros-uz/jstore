@@ -41,14 +41,6 @@ public class PostRepository {
         Session session = sessionFactory.getCurrentSession();
         res = session.createQuery("from Post").list();
 
-/*        List<Map<String, Object>> list = DbManager.runQuery("select * from \"Posts\"");
-
-        for(Map<String, Object> item : list){
-            Post p = new PostMapper().map(item);
-
-            res.add(p);
-        }*/
-
         return res;
     }
 
