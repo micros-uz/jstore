@@ -6,10 +6,9 @@ import uz.micros.jstore.entity.blog.Blog;
 import uz.micros.jstore.entity.blog.Comment;
 import uz.micros.jstore.entity.blog.Post;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
 public class PostService {
@@ -28,7 +27,7 @@ public class PostService {
                 comment.setAuthor("Davron");
                 comment.setText("Urtoqlar! Let's work!");
 
-                List<Comment> list = new ArrayList<Comment>();
+                Set<Comment> list = new HashSet<Comment>();
                 list.add(comment);
                 list.add(comment);
                 list.add(comment);

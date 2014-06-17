@@ -18,7 +18,7 @@ public class BlogService {
         Blog blog = new Blog();
         blog.setTitle("jStore Corporate Blog!!!");
 
-        List<Post> posts = rpstr.getPosts();
+        List<Post> posts = rpstr.findAll();
 
         blog.setPosts(posts);
 

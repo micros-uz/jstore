@@ -1,21 +1,25 @@
 package uz.micros.jstore.config;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.orm.hibernate4.HibernateTransactionManager;
-import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
+@EnableJpaRepositories(basePackages = "uz.micros.jstore.repository")
 public class PersistenceConfig {
 
     @Value("${jdbc.driverClassName}")
@@ -35,13 +39,25 @@ public class PersistenceConfig {
     private String hibernateHbm2ddlAuto;
 
     @Bean
-    public LocalSessionFactoryBean sessionFactory() {
-        final LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
-        sessionFactory.setDataSource(getDataSource());
-        sessionFactory.setPackagesToScan(new String[]{"uz.micros.jstore.entity.blog"});
-        sessionFactory.setHibernateProperties(hibernateProperties());
+    public EntityManagerFactory entityManagerFactory() {
+        LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
+        lef.setJpaVendorAdapter(jpaVendorAdapter());
+        lef.setJpaProperties(hibernateProperties());
+        lef.setPackagesToScan("uz.micros.jstore.entity.blog");
+        lef.setDataSource(dataSource());
+        lef.afterPropertiesSet();
 
-        return sessionFactory;
+        return lef.getObject();
+    }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter() {
+        HibernateJpaVendorAdapter jva = new HibernateJpaVendorAdapter();
+        jva.setShowSql(true);
+        jva.setGenerateDdl(true);
+        jva.setDatabase(Database.MYSQL);
+
+        return jva;
     }
 
     Properties hibernateProperties() {
@@ -55,8 +71,7 @@ public class PersistenceConfig {
         return res;
     }
 
-    //@Bean
-    private DataSource getDataSource() {
+    public DataSource dataSource() {
         final BasicDataSource res = new BasicDataSource();
         res.setDriverClassName(driverClassName);
         res.setUrl(url);
@@ -67,16 +82,10 @@ public class PersistenceConfig {
     }
 
     @Bean
-    @Autowired
-    public PlatformTransactionManager transactionManager(SessionFactory sessionFactory) {
-        HibernateTransactionManager txManager = new HibernateTransactionManager();
-        txManager.setSessionFactory(sessionFactory);
+    public PlatformTransactionManager transactionManager(){
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory());
 
-        return txManager;
+        return transactionManager;
     }
-/*
-    @Bean
-    public PersistenceExceptionTranslationPostProcessor exceptionTranslation() {
-        return new PersistenceExceptionTranslationPostProcessor();
-    }*/
 }

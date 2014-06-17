@@ -5,15 +5,16 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+@Table(name = "comments")
 public class Comment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String text;
     private Date date;
     private String author;
 
-    @Column(name = "post_id", insertable = false, updatable = false)
+    @Column(insertable = false, updatable = false)
     private int post_id;
 
     @ManyToOne

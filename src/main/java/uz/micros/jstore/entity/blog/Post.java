@@ -1,16 +1,14 @@
 package uz.micros.jstore.entity.blog;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table(name = "posts")
 public class Post {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String subject;
     private String text;
@@ -18,7 +16,8 @@ public class Post {
     private String author;
 
     @OneToMany(mappedBy = "post")
-    private List<Comment> comments;
+    // Set - обязательно!
+    private Set<Comment> comments;
 
     public int getId() {
         return id;
@@ -66,11 +65,11 @@ public class Post {
         this.author = author;
     }
 
-    public List<Comment> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(List<Comment> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 }
