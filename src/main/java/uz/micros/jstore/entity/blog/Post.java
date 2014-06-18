@@ -15,8 +15,7 @@ public class Post {
     private Date date;
     private String author;
 
-    @OneToMany(mappedBy = "post")
-    // Set - обязательно!
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
     public int getId() {

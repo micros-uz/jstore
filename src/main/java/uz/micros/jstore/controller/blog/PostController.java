@@ -22,8 +22,16 @@ public class PostController {
 
         Post post = service.get(id);
 
-        return new ModelAndView("blog/post")
-                .addObject("post", post)
-                .addObject("newComment", new Comment());
+        if (post != null) {
+            Comment comment = new Comment();
+            comment.setPost(post);
+
+            return new ModelAndView("blog/post")
+                    .addObject("post", post)
+                    .addObject("newComment", comment);
+        }
+        else{
+            return new ModelAndView("redirect:/blog");
+        }
     }
 }
