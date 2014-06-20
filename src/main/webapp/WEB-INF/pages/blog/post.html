@@ -21,6 +21,8 @@
     <p><h1>Comments</h1></p>
 
     <form th:action="@{/blog/comments}" method="post" th:object="${newComment}">
+        <input type="hidden" name="id" data-th-field="*{post.id}" />
+
         <div class="row">
             <div class="col-md-6">
                 <textarea th:field="*{text}" class="form-control" cols="1000" rows="5"></textarea>
