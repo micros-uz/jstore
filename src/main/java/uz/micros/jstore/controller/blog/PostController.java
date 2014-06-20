@@ -1,8 +1,8 @@
 package uz.micros.jstore.controller.blog;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -31,7 +31,27 @@ public class PostController {
                     .addObject("newComment", comment);
         }
         else{
-            return new ModelAndView("redirect:/blog");
+            return new ModelAndView("notFound");
         }
+    }
+
+    @RequestMapping("/edit/{id}")
+    public String edit(ModelMap map, @PathVariable("id") int id){
+
+        Post post = service.get(id);
+
+        if (post != null){
+            map.addAttribute("post", post);
+
+            return "blog/editPost";
+        }else
+            return "notFound";
+    }
+
+    @RequestMapping(value = "/delete/{id}")
+    public ModelAndView delete(@PathVariable("id") int id){
+        service.delete(id);
+
+        return new ModelAndView("redirect:/blog");
     }
 }

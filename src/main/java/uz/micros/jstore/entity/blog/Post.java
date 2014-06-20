@@ -15,7 +15,7 @@ public class Post {
     private Date date;
     private String author;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Comment> comments;
 
     public int getId() {

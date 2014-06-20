@@ -15,6 +15,10 @@
             <p class="post-date" th:text="${post.date}"></p>
 
             <pre th:text="${post.text}"></pre>
+            <div class="pull-right">
+                <a class="btn btn-default" data-th-href="@{'/blog/posts/edit/' + ${post.id}}">Edit</a>
+                <a class="btn btn-default" data-th-href="@{'/blog/posts/delete/' + ${post.id}}">Delete</a>
+            </div>
         </div>
     </div>
 
