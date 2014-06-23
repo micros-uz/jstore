@@ -3,8 +3,10 @@ package uz.micros.jstore.controller.blog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import uz.micros.jstore.entity.blog.Comment;
 import uz.micros.jstore.entity.blog.Post;
@@ -16,6 +18,13 @@ public class PostController {
 
     @Autowired
     private PostService service;
+
+    @RequestMapping("/create")
+    public String create(ModelMap map){
+        map.addAttribute("post", new Post());
+
+        return "blog/editPost";
+    }
 
     @RequestMapping("/{id}/**")
     public ModelAndView getPost(@PathVariable int id){
@@ -53,5 +62,12 @@ public class PostController {
         service.delete(id);
 
         return new ModelAndView("redirect:/blog");
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView save(@ModelAttribute(value = "post") Post post){
+        post = service.save(post);
+
+        return new ModelAndView("redirect:/blog/posts/" + post.getId());
     }
 }

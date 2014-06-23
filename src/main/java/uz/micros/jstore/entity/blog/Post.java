@@ -10,9 +10,14 @@ public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(nullable = false)
     private String subject;
+    @Column(nullable = false)
     private String text;
+    @Column(nullable = false)
     private Date date;
+    @Column(nullable = false)
     private String author;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)

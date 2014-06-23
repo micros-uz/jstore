@@ -20,9 +20,13 @@ public class PostService {
         return post;
     }
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
-    public void save(Post post) {
-        post.setDate(new Date());
-        postRepository.saveAndFlush(post);
+    public Post save(Post post) {
+        if (post.getDate() == null)
+            post.setDate(new Date());
+        if (post.getAuthor() == null)
+            post.setAuthor("Anonymous");
+
+        return postRepository.saveAndFlush(post);
     }
 
     @Transactional(readOnly = false, propagation = Propagation.REQUIRED)
