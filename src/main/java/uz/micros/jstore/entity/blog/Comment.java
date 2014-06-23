@@ -1,17 +1,20 @@
 package uz.micros.jstore.entity.blog;
 
 
+import uz.micros.jstore.entity.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "comments")
-public class Comment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Comment extends BaseEntity{
+
+    @Column(nullable = false, columnDefinition = "varchar(512)")
     private String text;
+    @Column(nullable = false)
     private Date date;
+    @Column(nullable = false)
     private String author;
 
     @Column(insertable = false, updatable = false)
@@ -20,14 +23,6 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "post_id", nullable = false)
     private Post post;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getText() {
         return text;

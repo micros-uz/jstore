@@ -1,19 +1,18 @@
 package uz.micros.jstore.entity.blog;
 
+import uz.micros.jstore.entity.BaseEntity;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
 @Entity
 @Table(name = "posts")
-public class Post {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+public class Post extends BaseEntity{
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(120)")
     private String subject;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "varchar(4096)")
     private String text;
     @Column(nullable = false)
     private Date date;
@@ -22,14 +21,6 @@ public class Post {
 
     @OneToMany(mappedBy = "post", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     private Set<Comment> comments;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getSubject() {
         return subject;
