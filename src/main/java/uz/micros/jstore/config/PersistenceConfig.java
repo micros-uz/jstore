@@ -37,13 +37,15 @@ public class PersistenceConfig {
     private String hibernateShowSql;
     @Value("${hibernate.hbm2ddl.auto}")
     private String hibernateHbm2ddlAuto;
+    //@Value("${hibernate.hbm2ddl.import_files}")
+    //private String hibernateHbm2ddlImport;
 
     @Bean
     public EntityManagerFactory entityManagerFactory() {
         LocalContainerEntityManagerFactoryBean lef = new LocalContainerEntityManagerFactoryBean();
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaProperties(hibernateProperties());
-        lef.setPackagesToScan("uz.micros.jstore.entity.blog");
+        lef.setPackagesToScan("uz.micros.jstore.entity");
         lef.setDataSource(dataSource());
         lef.afterPropertiesSet();
 
@@ -65,6 +67,10 @@ public class PersistenceConfig {
         res.setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
         res.setProperty("hibernate.dialect", hibernateDialect);
         res.setProperty("hibernate.show_sql", hibernateShowSql);
+        res.setProperty("hibernate.hbm2ddl.auto", hibernateHbm2ddlAuto);
+        // import.sql is imported automatically
+       // res.setProperty("hibernate.hbm2ddl.import_files", hibernateHbm2ddlImport);
+
         // hibernateProperties.setProperty("hibernate.format_sql", "true");
         // hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
 
