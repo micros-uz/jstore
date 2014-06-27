@@ -26,9 +26,11 @@
             <div class="col-md-3" th:each="book : ${books}">
                 <div class="book-item">
                     <div class="book-item-img-box">
-                        <img class="book-item-img centred"
-                             th:attr="src=@{'/resources/images/' + ${book.id} + '.jpg'}"
-                             alt="Image"/>
+                        <a th:href="@{'/store/books/' + ${book.id}}">
+                            <img class="book-item-img centred"
+                                 th:attr="src=@{'/resources/images/' + ${book.id} + '.jpg'}"
+                                 alt="Image"/>
+                        </a>
                     </div>
                     <div class="book-item-author">
                         <a th:href="@{'/store/books/author/' + ${book.author.id}}"

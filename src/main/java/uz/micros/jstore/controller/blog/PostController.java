@@ -26,7 +26,7 @@ public class PostController {
         return "blog/editPost";
     }
 
-    @RequestMapping("/{id}/**")
+    @RequestMapping("/{id}")
     public ModelAndView getPost(@PathVariable int id){
 
         Post post = service.get(id);
@@ -45,7 +45,7 @@ public class PostController {
     }
 
     @RequestMapping("/edit/{id}")
-    public String edit(ModelMap map, @PathVariable("id") int id){
+    public String edit(ModelMap map, @PathVariable int id){
 
         Post post = service.get(id);
 
@@ -58,7 +58,7 @@ public class PostController {
     }
 
     @RequestMapping(value = "/delete/{id}")
-    public ModelAndView delete(@PathVariable("id") int id){
+    public ModelAndView delete(@PathVariable int id){
         service.delete(id);
 
         return new ModelAndView("redirect:/blog");

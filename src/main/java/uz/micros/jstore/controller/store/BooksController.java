@@ -15,15 +15,13 @@ public class BooksController extends BaseStoreController{
     @Autowired
     private BookService bookSvc;
 
-    @RequestMapping("/{id}/**")
-    public ModelAndView details(@PathVariable(value = "id") int id) {
+    @RequestMapping("/{id}")
+    public ModelAndView details(@PathVariable int id) {
 
         Book book = bookSvc.getById(id);
 
-        if (book != null)
-            return new ModelAndView("store/details")
-                    .addObject("book", book);
-        else
-            return new ModelAndView("notFound");
+        return book != null
+            ? new ModelAndView("store/details").addObject("book", book)
+            : new ModelAndView("notFound");
     }
 }
