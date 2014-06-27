@@ -16,4 +16,8 @@ public class BookService {
     public List<Book> getByGenre(int id) {
         return bookRepository.getByGenreId(id);
     }
+
+    public Book getById(int id) {
+        return bookRepository.findOne(id);
+    }
 }
