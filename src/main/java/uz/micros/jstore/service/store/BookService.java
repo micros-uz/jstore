@@ -20,4 +20,10 @@ public class BookService {
     public Book getById(int id) {
         return bookRepository.findOne(id);
     }
+
+    public Book save(Book book) {
+        Book res = bookRepository.save(book);
+
+        return res;
+    }
 }

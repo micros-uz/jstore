@@ -21,7 +21,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <hibernate.ver>4.3.5.Final</hibernate.ver>
-        <spring-data-jpa.ver>1.5.3.RELEASE</spring-data-jpa.ver>
+        <spring-data-jpa.ver>1.6.1.RELEASE</spring-data-jpa.ver>
 
         <tomcat-dbcp.ver>8.0.5</tomcat-dbcp.ver>
 
