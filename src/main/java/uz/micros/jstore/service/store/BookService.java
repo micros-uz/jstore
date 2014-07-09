@@ -26,4 +26,9 @@ public class BookService {
 
         return res;
     }
+
+    public void delete(int id) {
+        bookRepository.delete(id);
+    }
+
 }

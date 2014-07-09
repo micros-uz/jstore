@@ -3,10 +3,7 @@ package uz.micros.jstore.controller.store;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import uz.micros.jstore.entity.store.Book;
 import uz.micros.jstore.entity.store.Genre;
@@ -48,7 +45,6 @@ public class BooksController extends BaseStoreController{
 
         return new ModelAndView("store/editBook")
                 .addObject("book",book)
-                //.addObject("genres", getGenres())
                 .addObject("authors", authorService.getAuthors());
     }
 
@@ -60,7 +56,6 @@ public class BooksController extends BaseStoreController{
         if (result.hasErrors()) {
             return new ModelAndView("store/editBook")
                     .addObject("book", book)
-                    .addObject("genres", getGenres())
                     .addObject("authors", authorService.getAuthors())
                     .addObject("useSideBar", false);
         }
@@ -76,5 +71,31 @@ public class BooksController extends BaseStoreController{
         }
 
         return res;
+    }
+
+    @RequestMapping("/edit/{id}")
+    public ModelAndView edit(@PathVariable int id) {
+        Book book = bookSvc.getById(id);
+
+        if (book != null) {
+            return new ModelAndView("store/editBook")
+                    .addObject("book", book)
+                    .addObject("authors", authorService.getAuthors());
+        } else
+            return new ModelAndView("notFound");
+    }
+
+    @RequestMapping("/delete/{id}")
+    public String delete(@PathVariable int id) {
+        Book book = bookSvc.getById(id);
+
+        if (book != null) {
+            int genreId = book.getGenre().getId();
+
+            bookSvc.delete(id);
+
+            return "redirect:/store/genres/" + genreId;
+        }else
+            return "notFound";
     }
 }
