@@ -11,6 +11,9 @@ import java.util.List;
 public class BookService {
 
     @Autowired
+    private FileService fileSvc;
+
+    @Autowired
     private BookRepository bookRepository;
 
     public List<Book> getByGenre(int id) {
@@ -21,8 +24,14 @@ public class BookService {
         return bookRepository.findOne(id);
     }
 
-    public Book save(Book book) {
+    public Book save(Book book, byte[] file) {
         Book res = bookRepository.save(book);
+
+        if (res != null) {
+            if (file != null) {
+                fileSvc.saveBookImage(res.getId(), file);
+            }
+        }
 
         return res;
     }

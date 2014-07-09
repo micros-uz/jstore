@@ -4,12 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import uz.micros.jstore.entity.store.Book;
 import uz.micros.jstore.entity.store.Genre;
 import uz.micros.jstore.service.store.AuthorService;
 import uz.micros.jstore.service.store.BookService;
 
+import java.io.IOException;
 import java.util.List;
 
 @Controller
@@ -50,7 +52,8 @@ public class BooksController extends BaseStoreController{
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView save(@ModelAttribute(value = "book") Book book,
-                             BindingResult result) {
+                             BindingResult result,
+                             @RequestParam(required = false) MultipartFile file) {
         ModelAndView res = null;
 
         if (result.hasErrors()) {
@@ -61,10 +64,9 @@ public class BooksController extends BaseStoreController{
         }
 
         try {
-            book = bookSvc.save(book);
-            res = new ModelAndView("store/details")
-                    .addObject("book", book);
-        } catch (RuntimeException e) {
+            book = bookSvc.save(book, (file != null) ? file.getBytes() : null);
+            res = new ModelAndView("redirect:/store/books/" + book.getId());
+        } catch (IOException e) {
             res = new ModelAndView("error")
                     .addObject("errorCode", 0)
                     .addObject("errorMessage", e.getMessage());
