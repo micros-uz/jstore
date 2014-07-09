@@ -10,7 +10,7 @@
 
     <properties>
 
-        <webjars-bootstrap.ver>3.1.1-2</webjars-bootstrap.ver>
+        <webjars-bootstrap.ver>3.2.0</webjars-bootstrap.ver>
         <webjars-jquery.ver>2.1.0</webjars-jquery.ver>
 
         <spring.ver>4.0.5.RELEASE</spring.ver>
