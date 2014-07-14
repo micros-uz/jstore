@@ -13,13 +13,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+                .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/**").hasRole("USER")
+                .antMatchers("/webjars/**").permitAll()
+                .antMatchers("/resources/**").permitAll()
+                .anyRequest().authenticated()
             .and()
                 .formLogin()
+                    .loginPage("/signin")
+                    .loginProcessingUrl("/signin/authenticate")
                 .permitAll()
             .and()
-                .rememberMe();
+                .logout()
+                    .logoutSuccessUrl("/")
+                    .logoutUrl("/signout")
+                    .invalidateHttpSession(true)
+                    .deleteCookies("JSESSIONID");
     }
 
     @Override
