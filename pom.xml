@@ -22,6 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <hibernate.ver>4.3.5.Final</hibernate.ver>
+        <hibernate.validator.ver>5.1.1.Final</hibernate.validator.ver>
         <spring-data-jpa.ver>1.6.1.RELEASE</spring-data-jpa.ver>
 
         <tomcat-dbcp.ver>8.0.5</tomcat-dbcp.ver>
@@ -36,6 +37,19 @@
         </repository>
     </repositories>
     <dependencies>
+
+        <!-- JSR-303 validation -->
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <version>1.1.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>${hibernate.validator.ver}</version>
+        </dependency>
+
         <!-- WEB Jars -->
         <dependency>
             <groupId>org.webjars</groupId>

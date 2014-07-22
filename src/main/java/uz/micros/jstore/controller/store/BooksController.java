@@ -11,6 +11,7 @@ import uz.micros.jstore.entity.store.Genre;
 import uz.micros.jstore.service.store.AuthorService;
 import uz.micros.jstore.service.store.BookService;
 
+import javax.validation.Valid;
 import java.io.IOException;
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class BooksController extends BaseStoreController{
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ModelAndView save(@ModelAttribute(value = "book") Book book,
+    public ModelAndView save(@Valid @ModelAttribute(value = "book") Book book,
                              BindingResult result,
                              @RequestParam(required = false) MultipartFile file) {
         ModelAndView res = null;

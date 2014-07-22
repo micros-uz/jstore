@@ -1,5 +1,6 @@
 package uz.micros.jstore.service;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
@@ -31,6 +32,9 @@ public class UserService {
             throw new UsernameAlreadyInUseException(user.getUsername());
         }
         catch(PersistenceException e){
+            throw new ServiceException(e);
+        }
+        catch(ConstraintViolationException e){
             throw new ServiceException(e);
         }
     }

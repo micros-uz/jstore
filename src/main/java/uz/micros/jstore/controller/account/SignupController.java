@@ -2,6 +2,7 @@ package uz.micros.jstore.controller.account;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,6 +14,8 @@ import uz.micros.jstore.security.SignInUtils;
 import uz.micros.jstore.service.UserService;
 import uz.micros.jstore.service.exception.ServiceException;
 import uz.micros.jstore.service.exception.UsernameAlreadyInUseException;
+
+import javax.validation.Valid;
 
 @Controller
 public class SignupController {
@@ -27,7 +30,13 @@ public class SignupController {
     }
 
     @RequestMapping(value = "/signup", method = RequestMethod.POST)
-    public ModelAndView registerPost(@ModelAttribute("newUser") RegUserDto dto) throws ServiceException {
+    public ModelAndView registerPost(@Valid @ModelAttribute("newUser") RegUserDto dto,
+                                     BindingResult binding) throws ServiceException {
+
+        if (binding.hasErrors()) {
+            return new ModelAndView("account/signup")
+                    .addObject("newUser", dto);
+        }
 
         if (dto.getPassword().equals(dto.getPassword2())) {
 
@@ -38,11 +47,12 @@ public class SignupController {
                         dto.getPassword(), dto.getEmail(), AppUser.ROLE_USER));
                 SignInUtils.signin(dto.getUserName());
             } catch (UsernameAlreadyInUseException ex) {
-                return new ModelAndView("account/signup")
-                        .addObject("newUser", dto);
+                binding.rejectValue("username", "user.duplicateUsername", "already in use");
+                return null;
             }
             return new ModelAndView("redirect:/");
         } else {
+            binding.rejectValue("password2", "", "Password confirmation mismatch");
             return new ModelAndView("account/signup")
                     .addObject("newUser", dto);
         }

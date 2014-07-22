@@ -25,29 +25,46 @@
             <form name="f" th:action="@{/signup}"
                   th:object="${newUser}"
                   method="post">
+                <div class="formInfo">
+                    <div class="error" data-th-if="${#fields.hasErrors('*')}">Unable to sign up. Please fix the errors
+                        below and resubmit.
+                    </div>
+                </div>
                 <div class="form-group">
-                    <label for="firstName" th:text="#{logon.firstName}">First Name</label>
-                    <input th:field="*{firstName}" id="firstName" class="form-control"
+                    <label for="firstName" data-th-text="#{logon.firstName}">First Name</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('firstName')}"
+                          data-th-errors="*{firstName}"></span>
+                    <input data-th-field="*{firstName}" id="firstName" class="form-control"
                            autofocus="autofocus"/>
                 </div>
                 <div class="form-group">
-                    <label for="lastName" th:text="#{logon.lastName}">Last Name</label>
-                    <input type="text" id="lastName" th:field="*{lastName}" class="form-control"/>
+                    <label for="lastName" data-th-text="#{logon.lastName}">Last Name</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('lastName')}"
+                          data-th-errors="*{lastName}"></span>
+                    <input type="text" id="lastName" data-th-field="*{lastName}" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="userName" th:text="#{logon.userName}">User Name</label>
-                    <input type="text" id="userName" th:field="*{userName}" class="form-control"/>
+                    <label for="userName" data-th-text="#{logon.userName}">User Name</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('userName')}"
+                          data-th-errors="*{userName}"></span>
+                    <input type="text" id="userName" data-th-field="*{userName}" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="password" th:text="#{logon.pwd}">Password</label>
-                    <input type="password" id="password" th:field="*{password}" class="form-control"/>
+                    <label for="password" data-th-text="#{logon.pwd}">Password</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('password')}"
+                          data-th-errors="*{password}"></span>
+                    <input type="password" id="password" data-th-field="*{password}" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="password2" th:text="#{logon.pwdConfirm}">Password Confirm</label>
-                    <input type="password" id="password2" th:field="*{password2}" class="form-control"/>
+                    <label for="password2" data-th-text="#{logon.pwdConfirm}">Password Confirm</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('password2')}"
+                          data-th-errors="*{password2}"></span>
+                    <input type="password" id="password2" data-th-field="*{password2}" class="form-control"/>
                 </div>
                 <div class="form-group">
-                    <label for="email" th:text="#{logon.email}">Email</label>
+                    <label for="email" data-th-text="#{logon.email}">Email</label>
+                    <span class="field-error" data-th-if="${#fields.hasErrors('email')}"
+                          data-th-errors="*{email}"></span>
                     <input type="email" id="email" name="email" class="form-control"/>
                 </div>
 

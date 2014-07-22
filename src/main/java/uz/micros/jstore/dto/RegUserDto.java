@@ -1,15 +1,29 @@
 package uz.micros.jstore.dto;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.validation.constraints.Size;
+
 public class RegUserDto {
 
+    @NotEmpty
+    @Size(max = 15)
     private String firstName;
 
+    @NotEmpty
+    @Size(max = 15)
     private String lastName;
 
+    @NotEmpty
+    @Size(max = 10)
     private String userName;
 
+    @NotEmpty
+    @Size(max = 10)
     private String password;
 
+    @NotEmpty
+    @Size(max = 10)
     private String password2;
 
     private String email;
