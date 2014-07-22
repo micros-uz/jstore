@@ -1,0 +1,60 @@
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorator="master">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title layout:fragment="title">Register</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>Sign Up</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div th:if="${!#strings.isEmpty(message)}"
+                 th:class="${message.type.cssClass}"
+                 th:text="${message.text}">error message text
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form name="f" th:action="@{/signup}"
+                  th:object="${newUser}"
+                  method="post">
+                <div class="form-group">
+                    <label for="firstName" th:text="#{logon.firstName}">First Name</label>
+                    <input th:field="*{firstName}" id="firstName" class="form-control"
+                           autofocus="autofocus"/>
+                </div>
+                <div class="form-group">
+                    <label for="lastName" th:text="#{logon.lastName}">Last Name</label>
+                    <input type="text" id="lastName" th:field="*{lastName}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="userName" th:text="#{logon.userName}">User Name</label>
+                    <input type="text" id="userName" th:field="*{userName}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="password" th:text="#{logon.pwd}">Password</label>
+                    <input type="password" id="password" th:field="*{password}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="password2" th:text="#{logon.pwdConfirm}">Password Confirm</label>
+                    <input type="password" id="password2" th:field="*{password2}" class="form-control"/>
+                </div>
+                <div class="form-group">
+                    <label for="email" th:text="#{logon.email}">Email</label>
+                    <input type="email" id="email" name="email" class="form-control"/>
+                </div>
+
+                <input type="submit" class="btn btn-primary" th:value="#{logon.signup}"/>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
