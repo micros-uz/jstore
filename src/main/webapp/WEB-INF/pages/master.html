@@ -56,6 +56,22 @@
             <li>
                 <a href="?lang=ru"><i class="famfamfam-flag-ru"></i></a>
             </li>
+            <li class="dropdown">
+                <a th:if="${#httpServletRequest.remoteUser == null}" th:href="@{/signin}">
+                    <span th:text="#{acc.hello}">Hello Guest</span><br></br>
+                    <span th:text="#{acc.signin}">Sign In</span>
+                </a>
+                <a th:if="${#httpServletRequest.remoteUser != null}" href="#" class="dropdown-toggle"
+                   data-toggle="dropdown">
+                    <span th:text="${#httpServletRequest.remoteUser}" class="bold"></span><br></br>
+                    <span th:text="#{acc.myacc}">My Account</span>
+                    <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a th:href="@{/signout}" th:text="#{acc.logout}">Logout</a></li>
+                    <li><a href="#" th:text="#{acc.mybasket}">My Basket</a></li>
+                </ul>
+            </li>
         </ul>
     </div>
 </nav>
