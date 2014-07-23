@@ -1,5 +1,7 @@
 package uz.micros.jstore.entity;
 
+import org.hibernate.search.annotations.DocumentId;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,6 +13,7 @@ public abstract class BaseEntity implements Serializable {
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @DocumentId
     private int id;
 
     public int getId() {

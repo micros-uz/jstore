@@ -1,5 +1,8 @@
 package uz.micros.jstore.entity.store;
 
+
+import org.hibernate.search.annotations.*;
+import org.hibernate.search.annotations.Index;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.multipart.MultipartFile;
 import uz.micros.jstore.entity.BaseEntity;
@@ -9,10 +12,12 @@ import javax.validation.constraints.*;
 
 @Entity
 @Table(name = "Books")
+@Indexed
 public class Book extends BaseEntity {
     @NotEmpty
     @Size(max = 200)
     @Column(name = "title", columnDefinition = "varchar(200)", nullable = false, unique = true)
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.YES)
     private String title;
 
     @Column(name = "author_id", insertable = false, updatable = false)
@@ -55,6 +60,7 @@ public class Book extends BaseEntity {
     @NotEmpty
     @Size(max = 3072)
     @Column(name = "description", nullable = false, columnDefinition = "varchar(3072)")
+    @Field(index = Index.YES, analyze = Analyze.NO, store = Store.YES)
     private String desc;
 
     public String getTitle() {
