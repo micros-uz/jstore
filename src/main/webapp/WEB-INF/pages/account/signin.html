@@ -16,7 +16,7 @@
         <div class="col-md-6">
             <h3 th:text="#{logon.newcust}">New Customer!</h3>
 
-            <p th:text="#{logon.newcust2}">By creating an account at eStore you will be able to shop faster, be up to
+            <p th:text="#{logon.newcust2}">By creating an account at jStore you will be able to shop faster, be up to
                 date on an orders status,
                 and keep track of the orders you have previously made.</p>
             <br></br>
@@ -61,6 +61,30 @@
                 </div>
             </div>
             <br></br>
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="social" id="socialLoginForm">
+                        <h2 th:text="#{logon.welcome3}">Use another service to log in.</h2>
+
+                        <a th:href="@{/auth/twitter}" title="Log in using your twitter account"
+                           class="btn btn-lg btn-twitter">
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                        <a th:href="@{/auth/google}" title="Log in using your google-plus account"
+                           class="btn btn-lg btn-google-plus">
+                            <i class="fa fa-google-plus"></i>
+                        </a>
+                        <a th:href="@{/auth/facebook}" title="Log in using your facebook account"
+                           class="btn btn-lg btn-facebook">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                        <a th:href="@{/auth/twitter}" title="Log in using your github account"
+                           class="btn btn-lg btn-github">
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </section>
+                </div>
+            </div>
         </div>
     </div>
 </div>

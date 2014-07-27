@@ -79,6 +79,7 @@ public class PersistenceConfig {
         return res;
     }
 
+    @Bean(destroyMethod = "close")
     public DataSource dataSource() {
         final BasicDataSource res = new BasicDataSource();
         res.setDriverClassName(driverClassName);
