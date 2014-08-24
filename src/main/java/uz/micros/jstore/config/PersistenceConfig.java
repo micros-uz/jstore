@@ -1,8 +1,8 @@
 package uz.micros.jstore.config;
 
-import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.Search;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,14 +24,8 @@ import java.util.Properties;
 @EnableJpaRepositories(basePackages = "uz.micros.jstore.repository")
 public class PersistenceConfig {
 
-    @Value("${jdbc.driverClassName}")
-    private String driverClassName;
-    @Value("${jdbc.url}")
-    private String url;
-    @Value("${jdbc.userName}")
-    private String userName;
-    @Value("${jdbc.password}")
-    private String pwd;
+    @Autowired
+    private DataSource dataSource;
 
     @Value("${hibernate.dialect}")
     private String hibernateDialect;
@@ -48,7 +42,7 @@ public class PersistenceConfig {
         lef.setJpaVendorAdapter(jpaVendorAdapter());
         lef.setJpaProperties(hibernateProperties());
         lef.setPackagesToScan("uz.micros.jstore.entity");
-        lef.setDataSource(dataSource());
+        lef.setDataSource(dataSource);
         lef.afterPropertiesSet();
 
         return lef.getObject();
@@ -75,17 +69,6 @@ public class PersistenceConfig {
 
         // hibernateProperties.setProperty("hibernate.format_sql", "true");
         // hibernateProperties.setProperty("hibernate.globally_quoted_identifiers", "true");
-
-        return res;
-    }
-
-    @Bean(destroyMethod = "close")
-    public DataSource dataSource() {
-        final BasicDataSource res = new BasicDataSource();
-        res.setDriverClassName(driverClassName);
-        res.setUrl(url);
-        res.setUsername(userName);
-        res.setPassword(pwd);
 
         return res;
     }
