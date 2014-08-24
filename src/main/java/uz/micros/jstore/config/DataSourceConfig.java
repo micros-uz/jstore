@@ -1,4 +1,4 @@
-package uz.micros.estore.config;
+package uz.micros.jstore.config;
 
 import org.apache.tomcat.dbcp.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Value;
