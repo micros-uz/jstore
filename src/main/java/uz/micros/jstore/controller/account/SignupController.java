@@ -16,7 +16,7 @@ import uz.micros.jstore.dto.Message;
 import uz.micros.jstore.dto.MessageType;
 import uz.micros.jstore.dto.RegUserDto;
 import uz.micros.jstore.entity.AppUser;
-import uz.micros.jstore.security.SignInUtils;
+import uz.micros.jstore.security.SignUtils;
 import uz.micros.jstore.service.UserService;
 import uz.micros.jstore.service.exception.ServiceException;
 import uz.micros.jstore.service.exception.UsernameAlreadyInUseException;
@@ -68,7 +68,7 @@ public class SignupController {
                         dto.getLastName(),
                         dto.getUserName(),
                         dto.getPassword(), dto.getEmail(), AppUser.ROLE_USER));
-                SignInUtils.signin(dto.getUserName());
+                SignUtils.signin(dto.getUserName());
                 providerSignInUtils.doPostSignUp(dto.getUserName(), request);
             } catch (UsernameAlreadyInUseException ex) {
                 binding.rejectValue("username", "user.duplicateUsername", "already in use");
