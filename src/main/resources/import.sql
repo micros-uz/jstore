@@ -28,6 +28,8 @@ insert into Authors (Name) values (U&'\0421\0442\0430\0440\0438\043a\043e\0432 \
 insert into Authors (Name) values (U&'\041c\043b\0435\0447\0438\043d \041b.\041c.');
 insert into Authors (Name) values (U&'\041a\043e\0440\043d\0435\0435\0432\0430 \0415.\0410.');
 insert into Authors (Name) values (U&'\042d\0441\043f\043e\0437\0438\0442\043e \0414.');
+insert into Authors (Name) values ('Eng Author');
+
 
 insert into Series (Genre_Id, Title) values (9, U&'\041a\043b\0430\0441\0441\0438\043a\0430 computer science');
 insert into Series (Genre_Id, Title) values (9, U&'\041c\0430\0441\0442\0435\0440-\043a\043b\0430\0441\0441');
