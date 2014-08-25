@@ -34,6 +34,7 @@
         <spring.social.facebook.ver>1.1.0.RELEASE</spring.social.facebook.ver>
         <spring.social-twitter.ver>1.1.0.RELEASE</spring.social-twitter.ver>
 
+        <postgresql.ver>9.3-1101-jdbc41</postgresql.ver>
     </properties>
 
     <repositories>
@@ -267,7 +268,7 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-            <version>9.3-1101-jdbc41</version>
+            <version>${postgresql.ver}</version>
         </dependency>
 
         <dependency>

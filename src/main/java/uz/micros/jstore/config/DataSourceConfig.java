@@ -26,10 +26,17 @@ public class DataSourceConfig {
 
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
+/*
         String username = System.getenv("OPENSHIFT_MYSQL_DB_USERNAME");
         String password = System.getenv("OPENSHIFT_MYSQL_DB_PASSWORD");
         String host = System.getenv("OPENSHIFT_MYSQL_DB_HOST");
         String port = System.getenv("OPENSHIFT_MYSQL_DB_PORT");
+        String databaseName = System.getenv("OPENSHIFT_APP_NAME");
+*/
+        String username = System.getenv("OPENSHIFT_POSTGRESQL_DB_USERNAME");
+        String password = System.getenv("OPENSHIFT_POSTGRESQL_DB_PASSWORD");
+        String host = System.getenv("OPENSHIFT_POSTGRESQL_DB_HOST");
+        String port = System.getenv("OPENSHIFT_POSTGRESQL_DB_PORT");
         String databaseName = System.getenv("OPENSHIFT_APP_NAME");
 
         if (host == null) {
@@ -40,7 +47,8 @@ public class DataSourceConfig {
             databaseName = dbName;
         }
 
-        String url = "jdbc:mysql://" + host + ":" + port + "/" + databaseName;
+        //String url = "jdbc:mysql://" + host + ":" + port + "/" + databaseName;
+        String url = "jdbc:postgresql://" + host + ":" + port + "/" + databaseName;
         BasicDataSource dataSource = new BasicDataSource();
         dataSource.setDriverClassName(driverClassName);
         dataSource.setUrl(url);
